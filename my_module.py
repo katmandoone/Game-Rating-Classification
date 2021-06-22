@@ -91,7 +91,7 @@ def pie_charts(true_lab, pred_lab, labels):
 
 def evaluate(model, history, test_gen):
 	''' evaluate model '''
-	print(model.evaluate(test_gen))
+	print(model.evalute(test_gen))
 	y_true, y_pred = true_pred(model, test_gen)
 	labels, true_labels, pred_labels = get_labels(y_true, y_pred, test_gen)
 	plot_model(history)
