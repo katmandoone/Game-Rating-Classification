@@ -1,6 +1,13 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
+<<<<<<< HEAD
+from sklearn.metrics import confusion_matrix, classification_report
+import numpy as np
+import confusion_matrix_pretty_print as cmpp
+import pandas as pd
+=======
 from sklearn.metrics import confusion_matrix
+>>>>>>> 12a3753e9a4ce291b72dffcd2540d1ead788aa74
 
 def plot_model(hist):
     '''
@@ -29,7 +36,14 @@ def true_pred(model, test_gen):
     '''
     y_true = test_gen.classes
     predictions = model.predict(test_gen)
+<<<<<<< HEAD
+    if predictions.shape[1] > 1:
+    	y_pred = np.array([pred.argmax() for pred in predictions])
+    else:
+    	y_pred = np.round(predictions).astype('int').flatten()
+=======
     y_pred = predictions.round().flatten().astype('int')
+>>>>>>> 12a3753e9a4ce291b72dffcd2540d1ead788aa74
     return y_true, y_pred
 
 def get_labels(y_true, y_pred, test_gen):
@@ -47,6 +61,11 @@ def show_cm(labels, y_true, y_pred):
     input: class labels, true classes, predicted classes
     output: confusion matrix
     '''
+<<<<<<< HEAD
+    cm = confusion_matrix(y_true, y_pred)
+    cm_df = pd.DataFrame(cm, columns=labels, index=labels)
+    cmpp.pretty_plot_confusion_matrix(cm_df, pred_val_axis='col', figsize=[7,7])
+=======
     cm = confusion_matrix(y_true, y_pred, labels, normalize='true')
     fig = plt.figure()
     ax = fig.add_subplot(111)
@@ -58,12 +77,17 @@ def show_cm(labels, y_true, y_pred):
     plt.xlabel('Predicted')
     plt.ylabel('True')
     plt.show()
+>>>>>>> 12a3753e9a4ce291b72dffcd2540d1ead788aa74
     
 def pie_charts(true_lab, pred_lab, labels):
     '''
     input: true labels, predicted labels, class labels
     output: pie charts comparing distribution of true classes with predictions
     '''
+<<<<<<< HEAD
+
+=======
+>>>>>>> 12a3753e9a4ce291b72dffcd2540d1ead788aa74
     true_counts = [true_lab.count(x) for x in labels]
     pred_counts = [pred_lab.count(x) for x in labels]
     
@@ -75,4 +99,18 @@ def pie_charts(true_lab, pred_lab, labels):
     ax[1].set_title('Predicted')
     fig.legend(labels=labels, loc='center')
     plt.suptitle('Distrubution of Classes')
+<<<<<<< HEAD
     plt.tight_layout()
+
+def evaluate(model, history, test_gen):
+ 	''' evaluate model '''
+ 	print(model.evaluate(test_gen))
+ 	y_true, y_pred = true_pred(model, test_gen)
+ 	labels, true_labels, pred_labels = get_labels(y_true, y_pred, test_gen)
+ 	plot_model(history)
+ 	pie_charts(true_labels, pred_labels, labels)
+ 	show_cm(labels, true_labels, pred_labels)
+ 	print(classification_report(true_labels, pred_labels))
+=======
+    plt.tight_layout()
+>>>>>>> 12a3753e9a4ce291b72dffcd2540d1ead788aa74
