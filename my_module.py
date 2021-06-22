@@ -90,7 +90,7 @@ def pie_charts(true_lab, pred_lab, labels):
     plt.tight_layout()
 
 def evaluate(model, history, test_gen):
- 	''' evaluate model '''
+	''' evaluate model '''
 	print(model.evaluate(test_gen))
 	y_true, y_pred = true_pred(model, test_gen)
 	labels, true_labels, pred_labels = get_labels(y_true, y_pred, test_gen)
@@ -99,4 +99,3 @@ def evaluate(model, history, test_gen):
 	show_cm(labels, true_labels, pred_labels)
 	print(classification_report(true_labels, pred_labels))
 	plt.tight_layout()
- 
