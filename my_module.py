@@ -38,9 +38,9 @@ def true_pred(model, test_gen):
 	else:
 		y_pred = np.round(predictions).astype('int').flatten()
 		y_pred = predictions.round().flatten().astype('int')
-		return y_true, y_pred
+	return y_true, y_pred
 
-		def get_labels(y_true, y_pred, test_gen):
+def get_labels(y_true, y_pred, test_gen):
 	'''
 	input: true classes, predicted classes, test generator
 	output: class labels, true class labels, predicted class labels
@@ -58,16 +58,16 @@ def show_cm(labels, y_true, y_pred):
 	cm = confusion_matrix(y_true, y_pred)
 	cm_df = pd.DataFrame(cm, columns=labels, index=labels)
 	cmpp.pretty_plot_confusion_matrix(cm_df, pred_val_axis='col', figsize=[7,7])
-	cm = confusion_matrix(y_true, y_pred, labels, normalize='true')
-	fig = plt.figure()
-	ax = fig.add_subplot(111)
-	cax = ax.matshow(cm)
-	plt.title('Confusion Matrix')
-	fig.colorbar(cax)
-	ax.set_xticklabels([''] + labels)
-	ax.set_yticklabels([''] + labels)
-	plt.xlabel('Predicted')
-	plt.ylabel('True')
+	# cm = confusion_matrix(y_true, y_pred, labels, normalize='true')
+	# fig = plt.figure()
+	# ax = fig.add_subplot(111)
+	# cax = ax.matshow(cm)
+	# plt.title('Confusion Matrix')
+	# fig.colorbar(cax)
+	# ax.set_xticklabels([''] + labels)
+	# ax.set_yticklabels([''] + labels)
+	# plt.xlabel('Predicted')
+	# plt.ylabel('True')
 	plt.show()
 	
 def pie_charts(true_lab, pred_lab, labels):
@@ -91,7 +91,7 @@ def pie_charts(true_lab, pred_lab, labels):
 
 def evaluate(model, history, test_gen):
 	''' evaluate model '''
-	print(model.evalute(test_gen))
+	print(model.evaluate(test_gen))
 	y_true, y_pred = true_pred(model, test_gen)
 	labels, true_labels, pred_labels = get_labels(y_true, y_pred, test_gen)
 	plot_model(history)
