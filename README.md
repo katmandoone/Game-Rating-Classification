@@ -22,7 +22,7 @@ This process can be reviewed in the data_split notebook.
 
 Using ImageDataGenerator, I pulled up a batch of 32 images and their labels from the train set. Some noise was randomly added to images to help with generalization. Upon viewing the images, it certainly is not an easy task to identify a game's rating from a single image.
 
-![train_batch.png](attachment:train_batch.png)
+![train_batch.png](project_images/train_batch.png)
 
 # Model
 
@@ -30,7 +30,7 @@ In this phase, I started with a simple neural network. I didn't expect great res
 
 ## Model 1
 
-![model1cf.png](attachment:model1cf.png)
+![model1cf.png](project_images/model1cf.png)
 
 The first model gave an overall accuracy of about 40%, but only had 27% recall for M-rated games.
 
@@ -38,7 +38,7 @@ The first model gave an overall accuracy of about 40%, but only had 27% recall f
 
 Model 2 included four convolutional blocks, each with two convolutional layers, a pooling layer, and a dropout layer.
 
-![model2cf.png](attachment:model2cf.png)
+![model2cf.png](project_images/model2cf.png)
 
 This increased the overall accuracy to 47%, but more importantly raised the recall score to nearly 60%. And with a precision score also over 50%, this model looked much more promising that the first.
 
@@ -46,7 +46,7 @@ This increased the overall accuracy to 47%, but more importantly raised the reca
 
 For Model 3, I used a similar model architecture, but I added a BatchNormalization layer to each block and added class weights to the compile function.
 
-![model3cf.png](attachment:model3cf.png)
+![model3cf.png](project_images/model3cf.png)
 
 I'm not sure I understand how, but even with the class weights factored in, this model overestimated the T class more than either of the first two. Recall dropped about 12% for the M class as well, making this model less effective than Model 2.
 
@@ -54,7 +54,7 @@ I'm not sure I understand how, but even with the class weights factored in, this
 
 For the fourth model, I used the VGG-16 pretrained model with a few layers added to the end to allow some fitting to this data set.
 
-![model4cf.png](attachment:model4cf.png)
+![model4cf.png](project_images/model4cf.png)
 
 This model was able to break 50% for overall accuracy, but only managed 53% recall for the M class. Precision rose to 60%, but this model ultimately found mature content less often than Model 2.
 
@@ -62,7 +62,7 @@ This model was able to break 50% for overall accuracy, but only managed 53% reca
 
 For the fifth model, I decided to combine classes E-T to create a binary classification problem. I used the VGG architecture again and made new class weights. Although class weights didn't help my earlier model, the class imbalance was definitely to extreme to ignore in this case.
 
-![model5cf.png](attachment:model5cf.png)
+![model5cf.png](project_images/model5cf.png)
 
 This model achieved an 81% recall for M-rated games. With just 43% precision, this did mean a lot of false positives, but it seemed acceptable given the jump in recall.
 
@@ -70,9 +70,9 @@ This model achieved an 81% recall for M-rated games. With just 43% precision, th
 
 In order to try to better understand what the model was finding in these images, I looked at the outputs of the 5 blocks of the VGG architecture. The images are a bit cryptic, and they don't necessarily offer much in the way of insight as to how the model makes its predictions, but it does certainly show that the model is finding distinct features within each image.
 
-![testimg.png](attachment:testimg.png)
+![testimg.png](project_images/testimg.png)
 
-![block1convs.png](attachment:block1convs.png)
+![block1convs.png](project_images/block1convs.png)
 
 # Conclusion
 
