@@ -37,7 +37,6 @@ def true_pred(model, test_gen):
 		y_pred = np.array([pred.argmax() for pred in predictions])
 	else:
 		y_pred = np.round(predictions).astype('int').flatten()
-		y_pred = predictions.round().flatten().astype('int')
 	return y_true, y_pred
 
 def get_labels(y_true, y_pred, test_gen):
